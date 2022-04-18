@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Details for {{user.username}}{% endblock %}
+
+{% block content %}
+    <h3>{{user.username}}'s Profile</h3>
+    <form action="/logout" method="POST">
+        <button class="btn btn-primary my-3">Logout</button>
+    </form>
+    <form action="/users/{{user.username}}/delete" method="POST">
+        <button class="btn btn-danger my-3">Delete Account</button>
+    </form>
+
+    <p>First Name: {{user.first_name}}</p>
+    <p>Last Name: {{user.last_name}}</p>
+    <p>Email: {{user.email}}</p>
+
+    <a class="my-3 btn btn-success" href="/users/{{user.username}}/feedback/add">Give Feedback</a>
+    <h4>Comments</h4>
+    {% for comment in user.comments %}
+        <h6><u>{{comment.title}}</u></h6>
+        <p>{{comment.content}}</p>
+        <p>-{{comment.username}}</p>
+        <a class='mb-3 btn btn-sm btn-info' href="/feedback/{{comment.id}}/update">Edit Comment</a>
+        <form action="/feedback/{{comment.id}}/delete" method="POST">
+            <button class='mb-3 btn btn-sm btn-danger'>Delete Comment</button>
+        </form>
+    {% endfor %}
+{% endblock %}

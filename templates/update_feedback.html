@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <form action="/feedback/{{comment.id}}/update" method="POST" id="feedback-update-form">
+        {% include 'form_logic.html' %}
+        <button class="btn btn-success">Update Feedback</button>
+    </form>
+{% endblock %}
